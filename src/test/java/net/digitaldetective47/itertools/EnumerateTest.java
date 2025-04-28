@@ -16,7 +16,7 @@ public class EnumerateTest {
         for (int i = 0; i < 5; i++) {
             objects.add(new Object());
         }
-        Enumerate<Object> stream = new Enumerate<Object>(objects.iterator());
+        Enumerate<Object> stream = new Enumerate<Object>(objects);
         for (int i = 0; i < objects.size(); i++) {
             Map.Entry<Integer, Object> entry = stream.next();
             assertEquals(i, entry.getKey().intValue());
@@ -30,7 +30,7 @@ public class EnumerateTest {
         for (int i = 0; i < 5; i++) {
             objects.add(new Object());
         }
-        Enumerate<Object> stream = new Enumerate<Object>(objects.iterator(), 25);
+        Enumerate<Object> stream = new Enumerate<Object>(objects, 25);
         for (int i = 0; i < objects.size(); i++) {
             Map.Entry<Integer, Object> entry = stream.next();
             assertEquals(i + 25, entry.getKey().intValue());
