@@ -5,8 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Enumerate the elements of an iterable or iterator by the order there are
- * returned
+ * Enumerate the elements of an iterable by the order there are returned
  */
 public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
     private Iterator<T> source;
@@ -22,7 +21,8 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
     }
 
     public Enumerate(Iterable<T> source, int start) {
-        this(source.iterator(), start);
+        this.source = source.iterator();
+        count = start;
     }
 
     public Enumerate(Iterable<T> source) {
