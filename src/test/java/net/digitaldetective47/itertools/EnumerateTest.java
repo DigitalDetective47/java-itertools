@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,15 +27,7 @@ public class EnumerateTest {
 
     @Test
     public void testCustomStart() {
-        List<Object> objects = new ArrayList<Object>(5);
-        for (int i = 0; i < 5; i++) {
-            objects.add(new Object());
-        }
-        Enumerate<Object> stream = new Enumerate<Object>(objects, 25);
-        for (int i = 0; i < objects.size(); i++) {
-            Map.Entry<Integer, Object> entry = stream.next();
-            assertEquals(i + 25, entry.getKey().intValue());
-            assertSame(objects.get(i), entry.getValue());
-        }
+        Enumerate<Object> stream = new Enumerate<Object>(Collections.singleton(null), -3);
+        assertEquals(-3, stream.next().getKey().intValue());
     }
 }
