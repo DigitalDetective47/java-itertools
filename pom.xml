@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.digitaldetective47.itertools</groupId>
+  <artifactId>java-itertools</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <description>Java port of Python's itertools library and related functions</description>
+  <inceptionYear>2025</inceptionYear>
+  <url>https://github.com/DigitalDetective47/java-itertools</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Unlicense</name>
+      <url>https://unlicense.org/</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>DigitalDetective47</name>
+      <email>ninji2701@gmail.com</email>
+      <url>https://digitaldetective47.net</url>
+      <timezone>America/New_York</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>Github Issues</system>
+    <url>https://github.com/DigitalDetective47/java-itertools/issues</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://DigitalDetective47/java-itertools</connection>
+    <developerConnection>scm:git:git://DigitalDetective47/java-itertools</developerConnection>
+    <tag>main</tag>
+    <url>https://github.com/DigitalDetective47/java-itertools</url>
+  </scm>
+</project>
