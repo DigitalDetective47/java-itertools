@@ -11,22 +11,13 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
     private Iterator<T> source;
     private int count;
 
-    public Enumerate(Iterator<T> source, int start) {
-        this.source = source;
-        count = start;
-    }
-
-    public Enumerate(Iterator<T> source) {
-        this(source, 0);
-    }
-
     public Enumerate(Iterable<T> source, int start) {
         this.source = source.iterator();
         count = start;
     }
 
     public Enumerate(Iterable<T> source) {
-        this(source.iterator());
+        this(source, 0);
     }
 
     public boolean hasNext() {
