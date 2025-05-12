@@ -3,6 +3,9 @@ package net.digitaldetective47.itertools;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/**
+ * Interleave elements from multiple iterators
+ */
 public class ZipShortest<T> implements Iterator<T[]> {
     private Iterator<T>[] sources;
 
