@@ -16,6 +16,9 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
         count = start;
     }
 
+    /**
+     * Uses a start value of 0.
+     */
     public Enumerate(Iterable<T> source) {
         this(source, 0);
     }
