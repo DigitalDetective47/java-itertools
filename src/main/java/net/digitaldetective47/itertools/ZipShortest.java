@@ -23,4 +23,25 @@ public class ZipShortest<T> implements Iterator<T[]> {
         Arrays.parallelSetAll(ret, i -> sources[i].next());
         return ret;
     }
+
+    /**
+     * Type-safe version for two iterables of different types
+     */
+    static public class DualType<U, V> implements Iterator<DualTypePair<U, V>> {
+        private Iterator<U> uSource;
+        private Iterator<V> vSource;
+
+        public DualType(Iterable<U> uSource, Iterable<V> vSource) {
+            this.uSource = uSource.iterator();
+            this.vSource = vSource.iterator();
+        }
+
+        public boolean hasNext() {
+            return uSource.hasNext() && vSource.hasNext();
+        }
+
+        public DualTypePair<U, V> next() {
+            return new DualTypePair<U, V>(uSource.next(), vSource.next());
+        }
+    }
 }
