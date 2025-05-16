@@ -9,10 +9,10 @@ import java.util.Objects;
  * Enumerate the elements of an iterable by the order there are returned
  */
 public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
-    private Iterator<T> source;
+    private Iterator<? extends T> source;
     private int count;
 
-    public Enumerate(Iterable<T> source, int start) {
+    public Enumerate(Iterable<? extends T> source, int start) {
         this.source = Objects.requireNonNull(source).iterator();
         count = start;
     }
@@ -20,7 +20,7 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
     /**
      * Uses a start value of 0.
      */
-    public Enumerate(Iterable<T> source) {
+    public Enumerate(Iterable<? extends T> source) {
         this(source, 0);
     }
 

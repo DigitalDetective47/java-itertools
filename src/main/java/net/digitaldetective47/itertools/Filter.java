@@ -5,14 +5,14 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Filter<T> implements Iterator<T> {
-    private Iterator<T> source;
+    private Iterator<? extends T> source;
     private Predicate<? super T> filter;
     // Used to implement hasNext; whether all future elements will be filtered out
     // cannot be determined soley based on the backing iterator
     private boolean hasLookahead;
     private T lookahead;
 
-    public Filter(Predicate<? super T> filter, Iterable<T> source) {
+    public Filter(Predicate<? super T> filter, Iterable<? extends T> source) {
         this.filter = Objects.requireNonNull(filter);
         this.source = Objects.requireNonNull(source).iterator();
         hasLookahead = false;

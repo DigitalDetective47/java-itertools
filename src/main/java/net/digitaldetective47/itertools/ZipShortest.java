@@ -9,10 +9,10 @@ import java.util.Objects;
  * Ends once any of its iterables are exhausted
  */
 public class ZipShortest<T> implements Iterator<T[]> {
-    private Iterator<T>[] sources;
+    private Iterator<? extends T>[] sources;
 
-    public ZipShortest(Iterable<T>... sources) {
-        this.sources = (Iterator<T>[]) new Iterator[sources.length];
+    public ZipShortest(Iterable<? extends T>... sources) {
+        this.sources = (Iterator<? extends T>[]) new Iterator[sources.length];
         Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
     }
 
@@ -30,10 +30,10 @@ public class ZipShortest<T> implements Iterator<T[]> {
      * Type-safe version for two iterables of different types
      */
     static public class DualType<U, V> implements Iterator<DualTypePair<U, V>> {
-        private Iterator<U> uSource;
-        private Iterator<V> vSource;
+        private Iterator<? extends U> uSource;
+        private Iterator<? extends V> vSource;
 
-        public DualType(Iterable<U> uSource, Iterable<V> vSource) {
+        public DualType(Iterable<? extends U> uSource, Iterable<? extends V> vSource) {
             this.uSource = uSource.iterator();
             this.vSource = vSource.iterator();
         }
