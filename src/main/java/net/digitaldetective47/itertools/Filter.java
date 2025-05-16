@@ -1,6 +1,7 @@
 package net.digitaldetective47.itertools;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Filter<T> implements Iterator<T> {
@@ -12,8 +13,8 @@ public class Filter<T> implements Iterator<T> {
     private T lookahead;
 
     public Filter(Predicate<? super T> filter, Iterable<T> source) {
-        this.filter = filter;
-        this.source = source.iterator();
+        this.filter = Objects.requireNonNull(filter);
+        this.source = Objects.requireNonNull(source).iterator();
         hasLookahead = false;
     }
 

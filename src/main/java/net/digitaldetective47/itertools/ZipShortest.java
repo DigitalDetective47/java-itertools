@@ -2,6 +2,7 @@ package net.digitaldetective47.itertools;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Interleave elements from multiple iterables
@@ -12,7 +13,7 @@ public class ZipShortest<T> implements Iterator<T[]> {
 
     public ZipShortest(Iterable<T>... sources) {
         this.sources = (Iterator<T>[]) new Iterator[sources.length];
-        Arrays.parallelSetAll(this.sources, i -> sources[i].iterator());
+        Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
     }
 
     public boolean hasNext() {
