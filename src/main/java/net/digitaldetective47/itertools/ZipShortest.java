@@ -11,10 +11,21 @@ import java.util.function.BiConsumer;
  */
 public class ZipShortest<T> implements Iterator<T[]> {
     private Iterator<? extends T>[] sources;
+    private boolean removeAllowed;
 
     public ZipShortest(Iterable<? extends T>... sources) {
         this.sources = (Iterator<? extends T>[]) new Iterator[sources.length];
         Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
+        removeAllowed = Arrays.stream(this.sources).parallel().unordered().anyMatch(source -> {
+            try {
+                source.remove();
+            } catch (UnsupportedOperationException e) {
+                return false;
+            } catch (IllegalStateException e) {
+                return true;
+            }
+            throw new IllegalStateException();
+        });
     }
 
     public boolean hasNext() {
@@ -27,16 +38,39 @@ public class ZipShortest<T> implements Iterator<T[]> {
         return ret;
     }
 
+    public void remove() {
+        if (!removeAllowed) {
+            throw new UnsupportedOperationException();
+        }
+        Arrays.stream(sources).parallel().unordered().forEach(Iterator::remove);
+    }
+
     /**
      * Type-safe version for two iterables of different types
      */
     static public class DualType<U, V> implements Iterator<DualTypePair<U, V>> {
         private Iterator<? extends U> uSource;
         private Iterator<? extends V> vSource;
+        private boolean removeAllowed;
 
         public DualType(Iterable<? extends U> uSource, Iterable<? extends V> vSource) {
             this.uSource = uSource.iterator();
             this.vSource = vSource.iterator();
+            try {
+                this.uSource.remove();
+            } catch (UnsupportedOperationException e) {
+                removeAllowed = false;
+                return;
+            } catch (IllegalStateException e) {
+            }
+            try {
+                this.vSource.remove();
+            } catch (UnsupportedOperationException e) {
+                removeAllowed = false;
+                return;
+            } catch (IllegalStateException e) {
+            }
+            removeAllowed = true;
         }
 
         public boolean hasNext() {
@@ -45,6 +79,14 @@ public class ZipShortest<T> implements Iterator<T[]> {
 
         public DualTypePair<U, V> next() {
             return new DualTypePair<U, V>(uSource.next(), vSource.next());
+        }
+
+        public void remove() {
+            if (!removeAllowed) {
+                throw new UnsupportedOperationException();
+            }
+            uSource.remove();
+            vSource.remove();
         }
 
         public void forEachRemaining(BiConsumer<? super U, ? super V> action) {

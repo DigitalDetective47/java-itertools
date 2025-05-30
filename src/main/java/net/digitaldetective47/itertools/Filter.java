@@ -43,4 +43,8 @@ public class Filter<T> implements Iterator<T> {
         } while (!filter.test(result));
         return result;
     }
+
+    public void remove(){
+        source.remove();
+    }
 }
