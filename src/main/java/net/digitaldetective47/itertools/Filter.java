@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+/**
+ * Return only elements from an iterable that fulfill a condition
+ */
 public class Filter<T> implements Iterator<T> {
     private Iterator<? extends T> source;
     private Predicate<? super T> filter;

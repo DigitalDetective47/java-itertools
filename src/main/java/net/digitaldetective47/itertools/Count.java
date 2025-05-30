@@ -2,6 +2,9 @@ package net.digitaldetective47.itertools;
 
 import java.util.PrimitiveIterator;
 
+/**
+ * Counts numbers forever
+ */
 public class Count implements PrimitiveIterator.OfLong {
     long next;
     long step;
