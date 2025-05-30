@@ -4,6 +4,7 @@ import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.ObjIntConsumer;
 
 /**
  * Enumerate the elements of an iterable by the order there are returned
@@ -30,5 +31,11 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
 
     public Map.Entry<Integer, T> next() {
         return new AbstractMap.SimpleImmutableEntry<Integer, T>(count++, source.next());
+    }
+
+    public void forEachRemaining(ObjIntConsumer<T> action) {
+        while (hasNext()) {
+            action.accept(source.next(), count);
+        }
     }
 }
