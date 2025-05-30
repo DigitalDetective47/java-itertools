@@ -48,7 +48,9 @@ public class ZipShortest<T> implements Iterator<T[]> {
         }
 
         public void forEachRemaining(BiConsumer<? super U, ? super V> action) {
-            this.forEachRemaining(uv -> action.accept(uv.u, uv.v));
+            while (hasNext()) {
+                action.accept(uSource.next(), vSource.next());
+            }
         }
     }
 }
