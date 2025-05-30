@@ -21,10 +21,10 @@ public class ZipShortestTest {
 
     @Test
     public void testDifferentSizes() {
-        Integer[] primes = { 2, 3, 5, 7, 11, 13, 17, 19};
-        Integer[] smalls = {1, 2, 3, 4, 5};
+        Integer[] primes = { 2, 3, 5, 7, 11, 13, 17, 19 };
+        Integer[] smalls = { 1, 2, 3, 4, 5 };
         ZipShortest<Integer> stream = new ZipShortest<Integer>(Arrays.asList(primes), Arrays.asList(smalls));
-        Integer[][] zipPairs = {{2,1},{3,2},{5,3},{7,4},{11,5}};
+        Integer[][] zipPairs = { { 2, 1 }, { 3, 2 }, { 5, 3 }, { 7, 4 }, { 11, 5 } };
         for (int i = 0; i < zipPairs.length; i++) {
             assertArrayEquals(zipPairs[i], stream.next());
         }
