@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
@@ -73,6 +74,10 @@ public class ZipLongest<T> implements Iterator<T[]> {
         public DualTypePair<U, V> next() {
             return new DualTypePair<U, V>(uSource.hasNext() ? uSource.next() : uFill.get(),
                     vSource.hasNext() ? vSource.next() : vFill.get());
+        }
+
+        public void forEachRemaining(BiConsumer<? super U, ? super V> action) {
+            this.forEachRemaining(uv -> action.accept(uv.u, uv.v));
         }
     }
 }

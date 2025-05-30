@@ -3,6 +3,7 @@ package net.digitaldetective47.itertools;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 /**
  * Interleave elements from multiple iterables
@@ -44,6 +45,10 @@ public class ZipShortest<T> implements Iterator<T[]> {
 
         public DualTypePair<U, V> next() {
             return new DualTypePair<U, V>(uSource.next(), vSource.next());
+        }
+
+        public void forEachRemaining(BiConsumer<? super U, ? super V> action) {
+            this.forEachRemaining(uv -> action.accept(uv.u, uv.v));
         }
     }
 }
