@@ -33,7 +33,7 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
         return new AbstractMap.SimpleImmutableEntry<Integer, T>(count++, source.next());
     }
 
-    public void forEachRemaining(ObjIntConsumer<T> action) {
+    public void forEachRemaining(ObjIntConsumer<? super T> action) {
         while (hasNext()) {
             action.accept(source.next(), count);
         }
