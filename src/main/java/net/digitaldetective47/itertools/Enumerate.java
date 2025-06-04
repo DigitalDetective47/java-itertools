@@ -39,7 +39,7 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
 
     public void forEachRemaining(ObjIntConsumer<? super T> action) {
         while (hasNext()) {
-            action.accept(source.next(), count);
+            action.accept(source.next(), count++);
         }
     }
 }
