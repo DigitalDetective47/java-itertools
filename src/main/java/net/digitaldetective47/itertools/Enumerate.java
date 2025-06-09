@@ -3,7 +3,6 @@ package net.digitaldetective47.itertools;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.ObjIntConsumer;
 
 /**
@@ -14,7 +13,7 @@ public class Enumerate<T> implements Iterator<Map.Entry<Integer, T>> {
     private int count;
 
     public Enumerate(Iterable<? extends T> source, int start) {
-        this.source = Objects.requireNonNull(source).iterator();
+        this.source = source.iterator();
         count = start;
     }
 

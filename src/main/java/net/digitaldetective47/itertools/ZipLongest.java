@@ -19,7 +19,7 @@ public class ZipLongest<T> implements Iterator<T[]> {
 
     public ZipLongest(Supplier<? extends T> fill, Iterable<? extends T>... sources) {
         this.sources = (Iterator<T>[]) new Iterator[sources.length];
-        Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
+        Arrays.parallelSetAll(this.sources, i -> sources[i].iterator());
         this.fill = Objects.requireNonNull(fill);
         removeAllowed = Arrays.stream(this.sources).parallel().unordered().anyMatch(source -> {
             try {

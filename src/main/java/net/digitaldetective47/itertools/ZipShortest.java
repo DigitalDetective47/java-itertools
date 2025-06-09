@@ -2,7 +2,6 @@ package net.digitaldetective47.itertools;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
@@ -15,7 +14,7 @@ public class ZipShortest<T> implements Iterator<T[]> {
 
     public ZipShortest(Iterable<? extends T>... sources) {
         this.sources = (Iterator<? extends T>[]) new Iterator[sources.length];
-        Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
+        Arrays.parallelSetAll(this.sources, i -> sources[i].iterator());
         removeAllowed = Arrays.stream(this.sources).parallel().unordered().anyMatch(source -> {
             try {
                 source.remove();

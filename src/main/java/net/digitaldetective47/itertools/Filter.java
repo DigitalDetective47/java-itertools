@@ -17,7 +17,7 @@ public class Filter<T> implements Iterator<T> {
 
     public Filter(Predicate<? super T> filter, Iterable<? extends T> source) {
         this.filter = Objects.requireNonNull(filter);
-        this.source = Objects.requireNonNull(source).iterator();
+        this.source = source.iterator();
         hasLookahead = false;
     }
 

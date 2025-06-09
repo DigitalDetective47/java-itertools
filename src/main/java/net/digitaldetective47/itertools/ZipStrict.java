@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
@@ -36,7 +35,7 @@ public class ZipStrict<T> implements Iterator<T[]> {
 
     public ZipStrict(Iterable<? extends T>... sources) {
         this.sources = (Iterator<? extends T>[]) new Iterator[sources.length];
-        Arrays.parallelSetAll(this.sources, i -> Objects.requireNonNull(sources[i]).iterator());
+        Arrays.parallelSetAll(this.sources, i -> sources[i].iterator());
         removeAllowed = Arrays.stream(this.sources).parallel().unordered().anyMatch(source -> {
             try {
                 source.remove();
