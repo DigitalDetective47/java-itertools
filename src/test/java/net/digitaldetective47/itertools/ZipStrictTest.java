@@ -27,7 +27,7 @@ public class ZipStrictTest {
         try {
             stream.hasNext();
             throw new AssertionError();
-        } catch (ZipStrict.MismatchedLength e) {
+        } catch (IllegalStateException e) {
         }
     }
 }
