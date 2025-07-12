@@ -16,13 +16,32 @@ import java.util.function.ToLongFunction;
 /**
  * Contains two objects of different types
  */
-public class DualTypePair<U, V> {
+public class DualTypePair<U, V> implements Cloneable {
     public U u;
     public V v;
 
     public DualTypePair(U u, V v) {
         this.u = u;
         this.v = v;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DualTypePair) {
+            return u.equals(((DualTypePair<?, ?>) obj).u) && v.equals(((DualTypePair<?, ?>) obj).v);
+        } else {
+            return super.equals(obj);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return 7 * u.hashCode() ^ 11 * v.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s(%s, %s)", getClass().getName(), u.toString(), v.toString());
     }
 
     /**
